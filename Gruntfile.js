@@ -31,7 +31,7 @@ module.exports = function (grunt) {
           {
             expand: true, 
             cwd: './', 
-            src: ['widgetboilerplate.js'], 
+            src: ['js/widgetboilerplate.js'], 
             dest: './', 
             rename: function(dest, src) {
               // use the source directory to create the file

@@ -22,7 +22,6 @@ module.exports = function (grunt) {
     }
   ];
 
-  console.log(replacements)
 
   grunt.initConfig({
     copy: {
@@ -104,5 +103,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
 
   // Default task.
+  grunt.registerTask('asdf', []);
   grunt.registerTask('default', ['string-replace','copy','clean']);
 };

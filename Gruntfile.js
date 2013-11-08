@@ -1,11 +1,18 @@
 'use strict';
 
 module.exports = function (grunt) {
+
+  
   var moment = require('./node_modules/moment/moment.js')
   console.log(moment(new Date()).format("YYYY-MM-DD"));
   // Project configuration.
   var pkgJson = require('./package.json')
-  var widgetName = pkgJson.name;
+  //var widgetName = pkgJson.name;
+  var widgetName = grunt.option('name');
+  console.log(widgetName,typeof widgetName)
+  if(typeof widgetName === 'undefined'){
+    widgetName = 'yourwidget';
+  }
   var widgetNameAllLower = widgetName.toLowerCase();
   var widgetNameAllCap = widgetNameAllLower.toUpperCase();
   var widgetNameFirstCap = widgetNameAllLower.charAt(0).toUpperCase() + widgetNameAllLower.slice(1);
@@ -39,7 +46,7 @@ module.exports = function (grunt) {
               // example with your directory structure
               //   dest = 'dev/js/'
               //   src = 'module1/js/main.js'
-              return './js/' + widgetName + '.js';
+              return './'+widgetNameAllLower+'/js/' + widgetName + '.js';
             }
           },
           {
@@ -52,26 +59,26 @@ module.exports = function (grunt) {
               // example with your directory structure
               //   dest = 'dev/js/'
               //   src = 'module1/js/main.js'
-              return './css/'+widgetName + '.css';
+              return './'+widgetNameAllLower+'/css/'+widgetName + '.css';
             }
           },
           {
             expand: true, 
             cwd: './', 
             src: ['2013-11-07-widgetboilerplate.md'], 
-            dest: './', 
+            dest: './'+widgetNameAllLower+'/', 
             rename: function(dest, src) {
               // use the source directory to create the file
               // example with your directory structure
               //   dest = 'dev/js/'
               //   src = 'module1/js/main.js'
-              return moment(new Date()).format("YYYY-MM-DD") + '-' + widgetName + '.md';
+              return './'+widgetNameAllLower+'/'+moment(new Date()).format("YYYY-MM-DD") + '-' + widgetNameAllLower + '.md';
             }
           }
         ]
       }
     },
-    clean: ["js/widgetboilerplate.js","css/widgetboilerplate.css","2013-11-07-widgetboilerplate.md"],
+    clean: ['./'+widgetNameAllLower+'/js/widgetboilerplate.js','./'+widgetNameAllLower+'/css/widgetboilerplate.css','./'+widgetNameAllLower+'/2013-11-07-widgetboilerplate.md'],
     config: {
       dist: './'
     },
@@ -83,7 +90,7 @@ module.exports = function (grunt) {
         files: [
           {
             src: '**/*.*', 
-            dest: './', 
+            dest: './'+widgetNameAllLower+'/', 
             filter: function(filepath) {
               
               //return (grunt.file.isDir(filepath) && require('fs').readdirSync(filepath).length === 0);

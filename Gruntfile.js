@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = function (grunt) {
+  var moment = require('./node_modules/moment/moment.js')
+  console.log(moment(new Date()).format("YYYY-MM-DD"));
   // Project configuration.
   var pkgJson = require('./package.json')
   var widgetName = pkgJson.name;
@@ -29,34 +31,47 @@ module.exports = function (grunt) {
         files: [
           {
             expand: true, 
-            cwd: './', 
+            //cwd: './', 
             src: ['js/widgetboilerplate.js'], 
-            dest: './', 
+            dest: './js/', 
             rename: function(dest, src) {
               // use the source directory to create the file
               // example with your directory structure
               //   dest = 'dev/js/'
               //   src = 'module1/js/main.js'
-              return widgetName + '.js';
+              return './js/' + widgetName + '.js';
+            }
+          },
+          {
+            expand: true, 
+            //cwd: './', 
+            src: ['css/widgetboilerplate.css'], 
+            dest: './css/', 
+            rename: function(dest, src) {
+              // use the source directory to create the file
+              // example with your directory structure
+              //   dest = 'dev/js/'
+              //   src = 'module1/js/main.js'
+              return './css/'+widgetName + '.css';
             }
           },
           {
             expand: true, 
             cwd: './', 
-            src: ['css/widgetboilerplate.css'], 
+            src: ['2013-11-07-widgetboilerplate.md'], 
             dest: './', 
             rename: function(dest, src) {
               // use the source directory to create the file
               // example with your directory structure
               //   dest = 'dev/js/'
               //   src = 'module1/js/main.js'
-              return widgetName + '.css';
+              return moment(new Date()).format("YYYY-MM-DD") + '-' + widgetName + '.md';
             }
           }
         ]
       }
     },
-    clean: ["widgetboilerplate.js,css/widgetboilerplate.css"],
+    clean: ["js/widgetboilerplate.js","css/widgetboilerplate.css","2013-11-07-widgetboilerplate.md"],
     config: {
       dist: './'
     },

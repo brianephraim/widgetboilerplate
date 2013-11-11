@@ -39,7 +39,7 @@ module.exports = function (grunt) {
           {
             expand: true, 
             //cwd: './', 
-            src: ['js/widgetboilerplate.js'], 
+            src: ['./'+widgetNameAllLower+'/'+'js/widgetboilerplate.js'], 
             dest: './js/', 
             rename: function(dest, src) {
               // use the source directory to create the file
@@ -52,7 +52,7 @@ module.exports = function (grunt) {
           {
             expand: true, 
             //cwd: './', 
-            src: ['css/widgetboilerplate.css'], 
+            src: ['./'+widgetNameAllLower+'/'+'css/widgetboilerplate.css'], 
             dest: './css/', 
             rename: function(dest, src) {
               // use the source directory to create the file
@@ -65,7 +65,7 @@ module.exports = function (grunt) {
           {
             expand: true, 
             cwd: './', 
-            src: ['2013-11-07-widgetboilerplate.md'], 
+            src: ['./'+widgetNameAllLower+'/'+'2013-11-07-widgetboilerplate.md'], 
             dest: './'+widgetNameAllLower+'/', 
             rename: function(dest, src) {
               // use the source directory to create the file
